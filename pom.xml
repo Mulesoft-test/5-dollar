@@ -17,6 +17,7 @@
 		<mule.maven.plugin.version>3.2.7</mule.maven.plugin.version>
 	</properties>
 
+	<!-- the next file is added -->
 	<build>
 		<plugins>
 			<plugin>
@@ -24,17 +25,41 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
-            <configuration>
-                    <sharedLibraries>
-                        <sharedLibrary>
-                            <groupId>mysql</groupId>
-                            <artifactId>mysql-connector-java</artifactId>
-                        </sharedLibrary>
-                    </sharedLibraries>
+				<configuration>
+				<classifier>mule-application</classifier>
                 </configuration>
-            </plugin>
+			</plugin>
+			<plugin>
+			<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
+				<configuration> 
+        <cloudHubDeployment> 
+          <muleVersion>${app.runtime}</muleVersion> 
+          <username>Nahom1122</username> 
+          <password>12345Six</password> 
+          <environment>Sandbox</environment> 
+          <!-- <region>eu-central-1</region>  -->
+          <workerType>Micro</workerType>
+          <workers>1</workers> 
+          <uri>https://anypoint.mulesoft.com</uri>; 
+          <applicationName>cicd-testing</applicationName> 
+        </cloudHubDeployment> 
+      </configuration> 
+      <executions> 
+        <execution> 
+          <id>deploy</id> 
+          <phase>deploy</phase> 
+          <goals> 
+            <goal>deploy</goal> 
+          </goals> 
+        </execution> 
+      </executions> 
+				</plugin>
 		</plugins>
 	</build>
+	
+	<!-- the above file is added -->
 
 	<dependencies>
         <dependency>
